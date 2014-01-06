@@ -8,11 +8,11 @@ module.exports = (env, callback) ->
 
   napCfg = env.config.nap
 
-  # prefix with location of `contents` directory
-  for ext of napCfg.assets
-    for section of napCfg.assets[ext]
-      for index of napCfg.assets[ext][section]
-        napCfg.assets[ext][section][index] = roots.contents + napCfg.assets[ext][section][index]
+  unless napCfg.prependContents is false
+    for ext of napCfg.assets
+      for section of napCfg.assets[ext]
+        for index of napCfg.assets[ext][section]
+          napCfg.assets[ext][section][index] = roots.contents + napCfg.assets[ext][section][index]
 
   preview = 'preview' == process.argv[2]
 
